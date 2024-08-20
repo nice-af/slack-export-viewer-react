@@ -1,0 +1,15 @@
+{
+  "name": "json-merger",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "convert": "ts-node main.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "glob": "^11.0.0"
+  }
+}
