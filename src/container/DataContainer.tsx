@@ -1,11 +1,6 @@
-import {
-  FC,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../contexts/data.context';
+import { SlackDumpData } from '../types/slackdump';
 
 const DataContainer: FC<{ children: ReactNode }> = ({ children }) => {
   const [data, setData] = useState<SlackDumpData>();
@@ -59,9 +54,10 @@ const DataContainer: FC<{ children: ReactNode }> = ({ children }) => {
         children
       ) : (
         <div>
-          <label htmlFor="importFileUpload">
+          <h1>
             import the <code>data.json</code> file
-          </label>
+          </h1>
+          <label htmlFor="importFileUpload">file upload</label>
           <input id="importFileUpload" type="file" ref={inputRef} />
         </div>
       )}

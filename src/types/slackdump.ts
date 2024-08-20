@@ -248,10 +248,12 @@ interface UserProfile {
   is_ultra_restricted: boolean;
 }
 
-type SlackDumpData = {
+export type SlackDumpData = {
   users: User[];
   mpims: unknown[];
   groups: unknown[];
   dms: unknown[];
   channels: Channel[];
-} & { [channelName: string]: { [date: string]: SlackMessage[] } };
+} & { [channelName: string]: ChannelData };
+
+export type ChannelData = { [date: string]: SlackMessage[] };
