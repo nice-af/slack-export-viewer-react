@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { formatTime, parseSlackTimestamp } from '../services/date.service';
+import { formatDate, formatTime, parseSlackTimestamp } from '../services/date.service';
 import { SlackMessage } from '../types/slackdump';
 import SlackBlockRenderer from './SlackBlockRenderer';
 import SlackFileRenderer from './SlackFileRenderer';
@@ -13,10 +13,12 @@ interface ChatMessageProps {
 const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
   const author = useUser(message.user!);
 
+  const postDate = parseSlackTimestamp(message.ts!);
+
   return (
     <div>
       {author && <p>Author: {author.profile.display_name}</p>}
-      <p>Date: {formatTime(parseSlackTimestamp(message.ts!))}</p>
+      <p>Date: {formatDate(postDate)} - {formatTime(postDate)}</p>
       {message.blocks &&
         message.blocks.map(block => (
           <SlackBlockRenderer key={block.block_id} block={block} />
@@ -41,6 +43,13 @@ const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
       )}
 
       {message.reply_count && <p>Replies: {message.reply_count}</p>}
+
+      <br />
+
+      <pre>
+        <code>{JSON.stringify(message, null, 2)}</code>
+      </pre>
+
       <hr />
     </div>
   );

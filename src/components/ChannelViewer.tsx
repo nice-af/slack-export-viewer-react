@@ -1,6 +1,6 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import { DataContext } from '../contexts/data.context';
-import DayViewer from './DayViewer';
+import ChatMessage from './ChatMessage';
 
 interface ChannelViewerProps {
   channelId: string;
@@ -8,13 +8,12 @@ interface ChannelViewerProps {
 
 const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
   const { data } = useContext(DataContext);
-  const [currentDay, setCurrentDay] = useState<string>();
-
   const channel = data!.channels.find(channel => channel.id === channelId);
   if (!channel) {
     throw new Error('Channel not found');
   }
-  const days = data![channel.name!];
+  const messages = data!.messages[channel.id!];
+  const filteredMessages = messages.filter(message => message.parent_user_id === undefined); // Filter out thread messages
 
   // const fileTypes = new Set();
   // Object.keys(days).forEach(day => {
@@ -29,14 +28,10 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
     <div>
       <h1>{channel.name}</h1>
       <ul>
-        {Object.keys(days).map(day => (
-          <li key={day}>
-            <button onClick={() => setCurrentDay(day)}>{day}</button>
-          </li>
+        {filteredMessages.map(message => (
+          <ChatMessage key={message.ts} message={message} />
         ))}
       </ul>
-
-      {currentDay && <DayViewer day={currentDay} />}
     </div>
   );
 };

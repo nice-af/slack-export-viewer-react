@@ -28,29 +28,31 @@ const SlackRichTextRenderer: FC<SlackRichTextRendererProps> = ({
         content.push(<span key={index}>:{element.name}:</span>);
         break;
       }
-      // TODO add more types
-      // case 'link': {
-      //   content.push(
-      //     <a key={index} href={element.url}>
-      //       {element.text}
-      //     </a>,
-      //   );
-      //   break;
-      // }
+      case 'link': {
+        content.push(
+          <a key={index} href={element.url}>
+            {element.text ? element.text : element.url}
+          </a>,
+        );
+        break;
+      }
       case 'user': {
         content.push(
           <SlackRichTextUser key={index} userId={element.user_id} />,
         );
         break;
       }
-      // case 'channel': {
-      //   content.push(<span key={index}>#{element.channel_id}</span>);
-      //   break;
-      // }
-      default: {
-        throw new Error(
-          `Unsupported rich text element: ${JSON.stringify(element)}`,
+      case 'broadcast': {
+        content.push(
+          <span key={index} style={{ color: 'blue' }}>
+            @{element.range}
+          </span>,
         );
+        break;
+      }
+      default: {
+        // TODO handle more types
+        break;
       }
     }
   });

@@ -1,6 +1,12 @@
 import { createContext } from 'react';
-import { SlackDumpData } from '../types/slackdump';
+import { SlackDataParsed } from '../types/slackdump';
 
 export const DataContext = createContext<{
-  data?: SlackDumpData;
-}>({});
+  data: SlackDataParsed;
+}>({
+  data: {
+    channels: [],
+    users: [],
+    messages: {},
+  },
+});

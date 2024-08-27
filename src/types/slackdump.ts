@@ -1,8 +1,9 @@
-import { Channel } from '@slack/web-api/dist/types/response/ConversationsInfoResponse';
 import {
-  MessageElement,
   BlockType,
+  MessageElement,
+  PurpleType,
 } from '@slack/web-api/dist/types/response/ConversationsHistoryResponse';
+import { Channel } from '@slack/web-api/dist/types/response/ConversationsInfoResponse';
 import {
   EnterpriseUser,
   Profile,
@@ -79,6 +80,8 @@ export interface SlackMessageRichTextBlock {
     | SlackMessageRichTextTextElement
     | SlackMessageRichTextEmojiElement
     | SlackMessageRichTextUserElement
+    | SlackMessageRichTextBroadcastElement
+    | SlackMessageRichTextLinkElement
     | SlackMessageRichTextRichTextSectionElement
   )[];
 }
@@ -94,17 +97,26 @@ interface SlackMessageUnknownElement {
 }
 
 export interface SlackMessageRichTextTextElement {
-  type: 'text';
+  type: PurpleType.Text;
   text: string;
 }
 export interface SlackMessageRichTextEmojiElement {
-  type: 'emoji';
+  type: PurpleType.Emoji;
   name: string;
   skin_tone?: number;
 }
 export interface SlackMessageRichTextUserElement {
-  type: 'user';
+  type: PurpleType.User;
   user_id: string;
+}
+export interface SlackMessageRichTextBroadcastElement {
+  type: PurpleType.Broadcast;
+  range: string;
+}
+export interface SlackMessageRichTextLinkElement {
+  type: PurpleType.Link;
+  url: string;
+  text: string;
 }
 
 export interface SlackMessageRichTextRichTextSectionElement {
@@ -147,10 +159,16 @@ interface UserProfile {
 
 export type SlackDumpData = {
   users: User[];
-  mpims: unknown[];
-  groups: unknown[];
-  dms: unknown[];
+  mpims: never[];
+  groups: never[];
+  dms: never[];
   channels: SlackChannel[];
 } & { [channelName: string]: ChannelData };
 
 export type ChannelData = { [date: string]: SlackMessage[] };
+
+export interface SlackDataParsed {
+  users: User[];
+  channels: SlackChannel[];
+  messages: Record<string, SlackMessage[]>;
+}
