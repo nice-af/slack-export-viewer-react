@@ -1,6 +1,7 @@
 import { FC, useContext, useState } from 'react';
 import { DataContext } from '../contexts/data.context';
 import ChannelViewer from './ChannelViewer';
+import { ChannelContext } from '../contexts/channel.context';
 
 const Viewer: FC = () => {
   const { data } = useContext(DataContext);
@@ -24,7 +25,15 @@ const Viewer: FC = () => {
     );
   }
 
-  return <ChannelViewer channelId={selectedChannelId} />;
+  const selectedChannel = data?.channels.find(
+    channel => channel.id === selectedChannelId,
+  );
+
+  return (
+    <ChannelContext.Provider value={{ channel: selectedChannel }}>
+      <ChannelViewer channelId={selectedChannelId} />
+    </ChannelContext.Provider>
+  );
 };
 
 export default Viewer;

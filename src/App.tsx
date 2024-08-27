@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import Viewer from './components/Viewer';
-import DataContainer from './container/DataContainer';
+import DataContainer from './containers/DataContainer';
 
 export const App: FC = () => {
   return (

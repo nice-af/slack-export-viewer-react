@@ -14,7 +14,16 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
   if (!channel) {
     throw new Error('Channel not found');
   }
-  const days = data![channel.name];
+  const days = data![channel.name!];
+
+  // const fileTypes = new Set();
+  // Object.keys(days).forEach(day => {
+  //   const dayData = days[day];
+  //   dayData.forEach(message =>
+  //     message.files?.forEach(file => fileTypes.add(file.filetype)),
+  //   );
+  // });
+  // console.log(fileTypes);
 
   return (
     <div>
@@ -27,7 +36,7 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
         ))}
       </ul>
 
-      {currentDay && <DayViewer channelId={channelId} day={currentDay} />}
+      {currentDay && <DayViewer day={currentDay} />}
     </div>
   );
 };
