@@ -45,7 +45,24 @@ const DataContainer: FC<{ children: ReactNode }> = ({ children }) => {
               });
 
               // Reverse the messages so they are in chronological order
-              messages[channel.id!] = messages[channel.id!].reverse();
+              messages[channel.id!] = messages[channel.id!].sort(
+                (a, b) => Number(a.ts) - Number(b.ts),
+              );
+
+              // Filter out bot messages
+              messages[channel.id!] = messages[channel.id!].filter(
+                message => message.subtype !== 'bot_message',
+              );
+
+              // Filter out any duplicate messages
+              const uniqueMessages = new Set<string>();
+              messages[channel.id!] = messages[channel.id!]!.filter(message => {
+                if (uniqueMessages.has(message.ts!)) {
+                  return false;
+                }
+                uniqueMessages.add(message.ts!);
+                return true;
+              });
             });
 
             setData({

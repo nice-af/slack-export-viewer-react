@@ -1,6 +1,9 @@
 import { FC, ReactNode } from 'react';
 import { SlackMessageRichTextBlock } from '../types/slackdump';
 import SlackRichTextUser from './SlackRichTextUser';
+import * as StyledBroadcast from './Broadcast.styles';
+import SlackEmojiRenderer from './SlackEmojiRenderer';
+import * as Styled from './SlackRichTextRenderer.styles';
 
 interface SlackRichTextRendererProps {
   elements: SlackMessageRichTextBlock['elements'];
@@ -24,15 +27,19 @@ const SlackRichTextRenderer: FC<SlackRichTextRendererProps> = ({
         break;
       }
       case 'emoji': {
-        // TODO convert emoji name to image
-        content.push(<span key={index}>:{element.name}:</span>);
+        content.push(
+          <SlackEmojiRenderer
+            key={index}
+            emoji={element.name}
+          ></SlackEmojiRenderer>,
+        );
         break;
       }
       case 'link': {
         content.push(
-          <a key={index} href={element.url}>
+          <Styled.Link key={index} href={element.url}>
             {element.text ? element.text : element.url}
-          </a>,
+          </Styled.Link>,
         );
         break;
       }
@@ -44,9 +51,9 @@ const SlackRichTextRenderer: FC<SlackRichTextRendererProps> = ({
       }
       case 'broadcast': {
         content.push(
-          <span key={index} style={{ color: 'blue' }}>
+          <StyledBroadcast.Broadcast key={index}>
             @{element.range}
-          </span>,
+          </StyledBroadcast.Broadcast>,
         );
         break;
       }

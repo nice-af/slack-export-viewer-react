@@ -170,5 +170,8 @@ export type ChannelData = { [date: string]: SlackMessage[] };
 export interface SlackDataParsed {
   users: User[];
   channels: SlackChannel[];
+  /**
+   * Messages mapped by channel name
+   */
   messages: Record<string, SlackMessage[]>;
 }

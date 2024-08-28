@@ -13,25 +13,20 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
     throw new Error('Channel not found');
   }
   const messages = data!.messages[channel.id!];
-  const filteredMessages = messages.filter(message => message.parent_user_id === undefined); // Filter out thread messages
+  const filteredMessages = messages.filter(
+    message => message.parent_user_id === undefined,
+  ); // Filter out thread messages
 
-  // const fileTypes = new Set();
-  // Object.keys(days).forEach(day => {
-  //   const dayData = days[day];
-  //   dayData.forEach(message =>
-  //     message.files?.forEach(file => fileTypes.add(file.filetype)),
-  //   );
-  // });
-  // console.log(fileTypes);
+  // const subTypes = new Set();
+  // messages.forEach(message => subTypes.add(message.subtype));
+  // console.log(subTypes);
 
   return (
     <div>
-      <h1>{channel.name}</h1>
-      <ul>
-        {filteredMessages.map(message => (
-          <ChatMessage key={message.ts} message={message} />
-        ))}
-      </ul>
+      <h1>&#35; {channel.name}</h1>
+      {filteredMessages.map(message => (
+        <ChatMessage key={message.ts} message={message} />
+      ))}
     </div>
   );
 };

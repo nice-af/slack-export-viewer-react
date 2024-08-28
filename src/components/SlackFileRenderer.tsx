@@ -1,6 +1,7 @@
 import { FileElement } from '@slack/web-api/dist/types/response/ConversationsHistoryResponse';
 import { FC, useContext } from 'react';
 import { ChannelContext } from '../contexts/channel.context';
+import * as Styled from './SlackFileRenderer.styles';
 
 interface SlackFileRendererProps {
   file: FileElement;
@@ -15,34 +16,38 @@ const SlackFileRenderer: FC<SlackFileRendererProps> = ({ file }) => {
 
   if (IMAGE_FILE_TYPES.includes(file.filetype!)) {
     return (
-      <div>
+      <Styled.Container>
         <img
           src={`./${channel!.name_normalized}/attachments/${file.id!}-${file.name}`}
           alt={file.title}
         />
-      </div>
+      </Styled.Container>
     );
   }
 
   if (VIDEO_FILE_TYPES.includes(file.filetype!)) {
     return (
-      <video controls>
-        <source
-          src={`./${channel!.name_normalized}/attachments/${file.id!}-${file.name}`}
-          type={`video/${file.filetype}`}
-        />
-      </video>
+      <Styled.Container>
+        <video controls>
+          <source
+            src={`./${channel!.name_normalized}/attachments/${file.id!}-${file.name}`}
+            type={`video/${file.filetype}`}
+          />
+        </video>
+      </Styled.Container>
     );
   }
 
   if (AUDIO_FILE_TYPES.includes(file.filetype!)) {
     return (
-      <audio controls>
-        <source
-          src={`./${channel!.name_normalized}/attachments/${file.id!}-${file.name}`}
-          type={`audio/${file.filetype}`}
-        />
-      </audio>
+      <Styled.Container>
+        <audio controls>
+          <source
+            src={`./${channel!.name_normalized}/attachments/${file.id!}-${file.name}`}
+            type={`audio/${file.filetype}`}
+          />
+        </audio>
+      </Styled.Container>
     );
   }
 
