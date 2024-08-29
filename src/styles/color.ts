@@ -10,6 +10,9 @@ export enum Color {
   Orange_900 = '#572300',
   Orange_1000_Deep = '#331400',
 
+  Blue_500 = '#1d9bd1',
+  Blue_600 = '#1988b8',
+
   Neutral_0_White = '#FFFFFF',
   Neutral_100 = '#F8F8F8',
   Neutral_200_OffWhite = '#D1D2D3',

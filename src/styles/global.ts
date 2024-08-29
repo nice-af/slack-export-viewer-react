@@ -39,12 +39,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${Color.Orange_600};
+    color: ${Color.Blue_500};
     text-decoration: underline;
     transition: color 0.25s ease;
 
     &:hover {
-      color: ${Color.Orange_700};
+      color: ${Color.Blue_600};
     }
   }
 `;

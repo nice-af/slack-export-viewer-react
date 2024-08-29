@@ -91,10 +91,19 @@ const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
         {/* Replies / thread */}
         {message.reply_count && (
           <div>
-            {/* TODO make pretty */}
-            <button onClick={() => setRepliesOpen(!repliesOpen)}>
-              {message.reply_count} Replies
-            </button>
+            <Styled.RepliesButton onClick={() => setRepliesOpen(!repliesOpen)}>
+              <span>{message.reply_count} Replies</span>
+              <svg width={12} height={12} viewBox="0 0 256 256">
+                <polyline
+                  points="96 48 176 128 96 208"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
+            </Styled.RepliesButton>
             {repliesOpen && (
               <Styled.RepliesContainer>
                 <SlackReplyRenderer threadTs={message.thread_ts!} />

@@ -45,6 +45,42 @@ export const FilesContainer = styled.div`
   gap: 10px;
 `;
 
+export const RepliesButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 12px;
+  margin: 4px -12px 0;
+  color: ${Color.Blue_500};
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: ${props => props.theme.borderRadius.medium};
+  appearance: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+  line-height: 1;
+  text-align: left;
+  background-color: transparent;
+
+  &:hover {
+    text-decoration: none;
+    background-color: ${Color.Neutral_900};
+    border-color: ${Color.Neutral_700};
+
+    svg {
+      opacity: 1;
+    }
+  }
+
+  svg {
+    display: block;
+    opacity: 0;
+    transition: 0.25s ease;
+  }
+`;
+
 export const RepliesContainer = styled.div`
   border-left: 1px solid ${Color.Neutral_700};
 `;
