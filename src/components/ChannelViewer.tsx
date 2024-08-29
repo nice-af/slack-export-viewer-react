@@ -88,7 +88,7 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
                 ref={virtualizer.measureElement}
               >
                 {hasLine && <hr />}
-                <ChatMessage message={message} postDate={postDate} />
+                <ChatMessage message={message} />
               </div>
             );
           })}
