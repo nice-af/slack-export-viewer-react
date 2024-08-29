@@ -1,6 +1,7 @@
 import { FC, useContext } from 'react';
 import { DataContext } from '../contexts/data.context';
 import ChatMessage from './ChatMessage';
+import * as Styled from './ChannelViewer.styles';
 
 interface ChannelViewerProps {
   channelId: string;
@@ -22,12 +23,17 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
   // console.log(subTypes);
 
   return (
-    <div>
-      <h1>&#35; {channel.name}</h1>
+    <Styled.Container>
+      <Styled.StickyHeader>
+        <Styled.Headline>&#35; {channel.name}</Styled.Headline>
+        {channel.topic?.value && (
+          <Styled.Topic>{channel.topic?.value}</Styled.Topic>
+        )}
+      </Styled.StickyHeader>
       {filteredMessages.map(message => (
         <ChatMessage key={message.ts} message={message} />
       ))}
-    </div>
+    </Styled.Container>
   );
 };
 

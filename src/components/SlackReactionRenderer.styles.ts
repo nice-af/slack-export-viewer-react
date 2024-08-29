@@ -11,6 +11,6 @@ export const Container = styled.span`
 
 export const Count = styled.span`
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   color: ${Color.Neutral_0_White};
 `;

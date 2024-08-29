@@ -30,7 +30,7 @@ const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
     <Styled.Container>
       {author && (
         <Styled.AvatarImage
-          src={author.profile.image_48}
+          src={author.profile.image_192}
           alt={`Profile picture of ${getProfileName(author.profile)}`}
         />
       )}

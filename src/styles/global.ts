@@ -3,9 +3,10 @@ import { Color } from './color';
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
     line-height: 1.5;
     font-weight: 400;
+    font-size: 15px;
 
     color: ${Color.Neutral_100};
     background-color: ${Color.Neutral_900};
@@ -17,9 +18,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin: 0 auto;
-    padding: 10px 20px 40px;
-    max-width: 1280px;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 18px;
   }
 `;

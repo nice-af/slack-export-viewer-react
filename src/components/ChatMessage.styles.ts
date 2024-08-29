@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 import { Color } from '../styles/color';
-import { transparentize } from 'polished';
 
 export const Container = styled.div`
   display: flex;
   gap: 10px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   transition: ${props => props.theme.transition};
 
   &:hover {
-    background-color: ${transparentize(0.8, Color.Neutral_800)};
+    background-color: ${Color.Neutral_800};
   }
 `;
 
 export const AvatarImage = styled.img`
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: ${props => props.theme.borderRadius.medium};
 `;
 
@@ -28,16 +27,16 @@ export const MessageHeader = styled.div`
 `;
 
 export const MessageHeaderAuthorName = styled.span`
-  font-weight: bold;
+  font-weight: 900;
 `;
 
 export const MessageHeaderTimestamp = styled.span`
-  font-style: italic;
-  color: ${Color.Neutral_500};
+  font-size: 12px;
+  color: ${Color.Neutral_300};
 `;
 
 export const SystemMessage = styled.span`
-  color: ${Color.Neutral_500};
+  color: ${Color.Neutral_300};
 `;
 
 export const FilesContainer = styled.div`
@@ -57,4 +56,3 @@ export const ReactionsContainer = styled.div`
   flex-wrap: wrap;
   margin-top: 10px;
 `;
-
