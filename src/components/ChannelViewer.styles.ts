@@ -3,6 +3,9 @@ import { Color } from '../styles/color';
 
 export const Container = styled.div`
   max-width: 760px;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
   margin: 0 auto;
   background-color: ${Color.Neutral_900};
   border: 1px solid ${Color.Neutral_700};
