@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, Fragment, useContext } from 'react';
 import { DataContext } from '../contexts/data.context';
 import ChatMessage from './ChatMessage';
 import * as Styled from './ChannelViewer.styles';
@@ -57,14 +57,10 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
         }
 
         return (
-          <>
+          <Fragment key={message.ts}>
             {hasLineBreak && <hr />}
-            <ChatMessage
-              key={message.ts}
-              message={message}
-              postDate={postDate}
-            />
-          </>
+            <ChatMessage message={message} postDate={postDate} />
+          </Fragment>
         );
       })}
     </Styled.Container>

@@ -6,6 +6,13 @@ export const Container = styled.div`
   gap: 10px;
   width: 300px;
   max-height: 360px;
+  margin-top: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  > img {
+    cursor: pointer;
+  }
 
   > img,
   video,

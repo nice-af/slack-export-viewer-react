@@ -53,4 +53,12 @@ export const GlobalStyles = createGlobalStyle`
     border-top: 1px solid ${Color.Neutral_700};
     margin: 12px 0;
   }
+
+  .medium-zoom-overlay {
+    z-index: 998;
+  }
+
+  .medium-zoom-image--opened{
+    z-index: 999;
+  }
 `;

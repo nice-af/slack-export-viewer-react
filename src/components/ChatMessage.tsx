@@ -1,9 +1,6 @@
 import { FC, useState } from 'react';
 import { useUser } from '../hooks/useUser';
-import {
-  formatDate,
-  formatTime
-} from '../services/date.service';
+import { formatDate, formatTime } from '../services/date.service';
 import {
   getProfileName,
   removeUserFromMessage,
@@ -96,9 +93,9 @@ const ChatMessage: FC<ChatMessageProps> = ({ message, postDate }) => {
                   points="96 48 176 128 96 208"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="32"
                 />
               </svg>
             </Styled.RepliesButton>
