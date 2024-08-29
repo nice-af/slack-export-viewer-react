@@ -4,7 +4,6 @@ export const theme = {
     medium: '8px',
     large: '16px',
   },
-  transition: '0.25s ease'
 };
 
 type ThemeType = typeof theme;

@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   gap: 10px;
   padding: 12px 24px;
-  transition: ${props => props.theme.transition};
+  transition: 0.15s ease;
 
   &:hover {
     background-color: ${Color.Neutral_800};

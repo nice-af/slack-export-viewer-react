@@ -5,6 +5,7 @@ import {
   SlackDumpData,
   SlackMessage,
 } from '../types/slackdump';
+import * as Styled from './DataContainer.styles';
 
 const DataContainer: FC<{ children: ReactNode }> = ({ children }) => {
   const [data, setData] = useState<SlackDataParsed>();
@@ -88,13 +89,28 @@ const DataContainer: FC<{ children: ReactNode }> = ({ children }) => {
 
   if (!data) {
     return (
-      <div>
+      <Styled.Container>
         <h1>
-          import the <code>data.json</code> file
+          Import the <code>data.json</code> file
         </h1>
-        <label htmlFor="importFileUpload">file upload</label>
-        <input id="importFileUpload" type="file" ref={inputRef} />
-      </div>
+        <Styled.Dropzone>
+          <svg width={72} height={72} viewBox="0 0 256 256" fill="none">
+            <g
+              stroke="currentColor"
+              strokeWidth="12"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M48 120V40a8 8 0 0 1 8-8h96l56 56v32" />
+              <path d="M152 32v56h56m23 71v49l-35-49v49m-46 0c11.598 0 21-10.969 21-24.5s-9.402-24.5-21-24.5-21 10.969-21 24.5 9.402 24.5 21 24.5zm-44.647-47.603s-26.158-6.803-28.265 9.617c-2.106 16.42 34.157 8.848 31.802 26.859-2.195 16.752-28.246 9.618-28.246 9.618M20 192.25c0 4.177 1.686 8.183 4.686 11.137 3 2.954 7.07 4.613 11.314 4.613 4.243 0 8.313-1.659 11.314-4.613 3-2.954 4.686-6.96 4.686-11.137V159" />
+            </g>
+          </svg>
+          <Styled.Input id="importFileUpload" type="file" ref={inputRef} />
+          <label htmlFor="importFileUpload">
+            Drag 'n' drop the file here, or click to select it
+          </label>
+        </Styled.Dropzone>
+      </Styled.Container>
     );
   }
 

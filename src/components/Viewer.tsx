@@ -2,6 +2,9 @@ import { FC, useContext, useState } from 'react';
 import { DataContext } from '../contexts/data.context';
 import ChannelViewer from './ChannelViewer';
 import { ChannelContext } from '../contexts/channel.context';
+import * as Styled from './Viewer.styles';
+import AvatarsList from './AvatarsList';
+import { Color } from '../styles/color';
 
 const Viewer: FC = () => {
   const { data } = useContext(DataContext);
@@ -10,18 +13,22 @@ const Viewer: FC = () => {
 
   if (!selectedChannelId) {
     return (
-      <div>
+      <Styled.Container>
         <h1>Select a channel</h1>
-        <ul>
+        <Styled.Ul>
           {data?.channels.map(channel => (
             <li key={channel.id}>
-              <button onClick={() => setSelectedChannelId(channel.id)}>
-                {channel.name}
-              </button>
+              <Styled.Button onClick={() => setSelectedChannelId(channel.id)}>
+                <Styled.Name>#{channel.name}</Styled.Name>
+                <AvatarsList
+                  userIds={channel.members}
+                  backgroundColor={Color.Neutral_800}
+                />
+              </Styled.Button>
             </li>
           ))}
-        </ul>
-      </div>
+        </Styled.Ul>
+      </Styled.Container>
     );
   }
 

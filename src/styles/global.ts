@@ -26,4 +26,25 @@ export const GlobalStyles = createGlobalStyle`
   h1 {
     font-size: 18px;
   }
+
+  code {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    margin: 0 5px;
+    background-color: ${Color.Neutral_800};
+    border-radius: 4px;
+    border: 1px solid ${Color.Neutral_700};
+    font-size: 0.85em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  a {
+    color: ${Color.Orange_600};
+    text-decoration: underline;
+    transition: color 0.25s ease;
+
+    &:hover {
+      color: ${Color.Orange_700};
+    }
+  }
 `;

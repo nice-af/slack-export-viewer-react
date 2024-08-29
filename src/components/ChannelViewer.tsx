@@ -2,6 +2,8 @@ import { FC, useContext } from 'react';
 import { DataContext } from '../contexts/data.context';
 import ChatMessage from './ChatMessage';
 import * as Styled from './ChannelViewer.styles';
+import AvatarsList from './AvatarsList';
+import { Color } from '../styles/color';
 
 interface ChannelViewerProps {
   channelId: string;
@@ -25,10 +27,17 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
   return (
     <Styled.Container>
       <Styled.StickyHeader>
-        <Styled.Headline>&#35; {channel.name}</Styled.Headline>
-        {channel.topic?.value && (
-          <Styled.Topic>{channel.topic?.value}</Styled.Topic>
-        )}
+        <div>
+          <Styled.Headline>&#35; {channel.name}</Styled.Headline>
+          {channel.topic?.value && (
+            <Styled.Topic>{channel.topic?.value}</Styled.Topic>
+          )}
+        </div>
+        <AvatarsList
+          userIds={channel.members}
+          backgroundColor={Color.Neutral_900}
+          othersBackgroundColor={Color.Neutral_800}
+        />
       </Styled.StickyHeader>
       {filteredMessages.map(message => (
         <ChatMessage key={message.ts} message={message} />
