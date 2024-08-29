@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useUser } from '../hooks/useUser';
-import { formatDate, formatTime } from '../services/date.service';
+import { formatDate, formatTime, parseSlackTimestamp } from '../services/date.service';
 import {
   getProfileName,
   removeUserFromMessage,
@@ -14,12 +14,12 @@ import SlackReplyRenderer from './SlackReplyRenderer';
 
 interface ChatMessageProps {
   message: SlackMessage;
-  postDate: Date;
 }
 
-const ChatMessage: FC<ChatMessageProps> = ({ message, postDate }) => {
+const ChatMessage: FC<ChatMessageProps> = ({ message,  }) => {
   const [repliesOpen, setRepliesOpen] = useState(false);
   const author = useUser(message.user!);
+  const postDate = parseSlackTimestamp(message.ts!);
 
   return (
     <Styled.Container>

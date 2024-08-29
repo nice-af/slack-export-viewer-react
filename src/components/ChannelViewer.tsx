@@ -59,7 +59,7 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
         return (
           <Fragment key={message.ts}>
             {hasLineBreak && <hr />}
-            <ChatMessage message={message} postDate={postDate} />
+            <ChatMessage message={message} />
           </Fragment>
         );
       })}
