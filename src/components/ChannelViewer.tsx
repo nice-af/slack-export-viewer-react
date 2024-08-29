@@ -4,6 +4,7 @@ import ChatMessage from './ChatMessage';
 import * as Styled from './ChannelViewer.styles';
 import AvatarsList from './AvatarsList';
 import { Color } from '../styles/color';
+import { parseSlackTimestamp } from '../services/date.service';
 
 interface ChannelViewerProps {
   channelId: string;
@@ -24,6 +25,9 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
   // messages.forEach(message => subTypes.add(message.subtype));
   // console.log(subTypes);
 
+  let dayString = '';
+  let isFirstMessageBlock = true;
+
   return (
     <Styled.Container>
       <Styled.StickyHeader>
@@ -39,9 +43,30 @@ const ChannelViewer: FC<ChannelViewerProps> = ({ channelId }) => {
           othersBackgroundColor={Color.Neutral_800}
         />
       </Styled.StickyHeader>
-      {filteredMessages.map(message => (
-        <ChatMessage key={message.ts} message={message} />
-      ))}
+      {filteredMessages.map(message => {
+        const postDate = parseSlackTimestamp(message.ts!);
+
+        // Insert a hr if the day is different from the previous message
+        const dateStringWithoutTime = postDate.toISOString().split('T')[0];
+        const hasLineBreak =
+          !isFirstMessageBlock && dayString !== dateStringWithoutTime;
+
+        if (dayString !== dateStringWithoutTime) {
+          isFirstMessageBlock = false;
+          dayString = dateStringWithoutTime;
+        }
+
+        return (
+          <>
+            {hasLineBreak && <hr />}
+            <ChatMessage
+              key={message.ts}
+              message={message}
+              postDate={postDate}
+            />
+          </>
+        );
+      })}
     </Styled.Container>
   );
 };

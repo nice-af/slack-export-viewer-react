@@ -1,30 +1,28 @@
 import { FC, useState } from 'react';
+import { useUser } from '../hooks/useUser';
 import {
   formatDate,
-  formatTime,
-  parseSlackTimestamp,
+  formatTime
 } from '../services/date.service';
-import { SlackMessage } from '../types/slackdump';
-import SlackBlockRenderer from './SlackBlockRenderer';
-import SlackFileRenderer from './SlackFileRenderer';
-import SlackReactionRenderer from './SlackReactionRenderer';
-import { useUser } from '../hooks/useUser';
-import SlackReplyRenderer from './SlackReplyRenderer';
-import * as Styled from './ChatMessage.styles';
 import {
   getProfileName,
   removeUserFromMessage,
 } from '../services/slack.service';
+import { SlackMessage } from '../types/slackdump';
+import * as Styled from './ChatMessage.styles';
+import SlackBlockRenderer from './SlackBlockRenderer';
+import SlackFileRenderer from './SlackFileRenderer';
+import SlackReactionRenderer from './SlackReactionRenderer';
+import SlackReplyRenderer from './SlackReplyRenderer';
 
 interface ChatMessageProps {
   message: SlackMessage;
+  postDate: Date;
 }
 
-const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
+const ChatMessage: FC<ChatMessageProps> = ({ message, postDate }) => {
   const [repliesOpen, setRepliesOpen] = useState(false);
   const author = useUser(message.user!);
-
-  const postDate = parseSlackTimestamp(message.ts!);
 
   return (
     <Styled.Container>

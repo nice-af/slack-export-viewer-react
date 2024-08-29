@@ -47,4 +47,10 @@ export const GlobalStyles = createGlobalStyle`
       color: ${Color.Blue_600};
     }
   }
+
+  hr {
+    border: none;
+    border-top: 1px solid ${Color.Neutral_700};
+    margin: 12px 0;
+  }
 `;
