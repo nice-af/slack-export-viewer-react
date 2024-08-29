@@ -27,7 +27,7 @@ const AvatarsCircle: FC<AvatarCicleProps> = ({ userId, borderColor }) => {
 interface AvatarListProps {
   userIds: string[];
   backgroundColor: Color;
-  othersBackgroundColor: Color;
+  othersBackgroundColor?: Color;
   maxAvatars?: number;
 }
 
