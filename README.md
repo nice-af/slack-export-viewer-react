@@ -7,11 +7,13 @@
 
 The reason for writing this script was the need to have a way to view messages and media files of a [Slack](https://slack.com/) channel after it was bound to be deleted. It was meant to preserve those messages for the future. This is the reason why this application is meant to be built into a single file React app using the [vite-plugin-singlefile](https://www.npmjs.com/package/vite-plugin-singlefile) Vite plugin to allow non tech savvy users to easily start the viewer.
 
+It should also act as a starting place for whoever would like to build something similar as this project in React, providing types and Slack-specific components.
+
 
 ## Usage
 
 ### Converting the slackdump export
-Before you can view your files, you need to export the data using [slackdump](https://github.com/rusq/slackdump).
+Before you can view your files, you need to export the Slack data you would like to view using [slackdump](https://github.com/rusq/slackdump).
 
 The format of the export is rather verbose and contains a lot of JSON files and folders. Those JSON files need to be imported in the viewer application. Since the application is running locally using the `file://` protocol, we are not able to import all of these files at once due to browser security restrictions. This repo comes with a script to merge all of those JSON files into one, allowing the end user to select a single `data.json` file using an `<input type="file">` element.
 
