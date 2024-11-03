@@ -1,52 +1,42 @@
 ![Screenshots of the Slack Export Viewer](.github/repo-header.png)
 
-# React + TypeScript + Vite
+**Slack export viewer written in React** is an application that allows you to view an export of [slackdump](https://github.com/rusq/slackdump) in the browser, mimicking a "Slack like" viewer experience.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Motivation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The reason for writing this script was the need to have a way to view messages and media files of a [Slack](https://slack.com/) channel after it was bound to be deleted. It was meant to preserve those messages for the future. This is the reason why this application is meant to be built into a single file React app using the [vite-plugin-singlefile](https://www.npmjs.com/package/vite-plugin-singlefile) Vite plugin to allow non tech savvy users to easily start the viewer.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Usage
 
-- Configure the top-level `parserOptions` property like this:
+### Converting the slackdump export
+Before you can view your files, you need to export the data using [slackdump](https://github.com/rusq/slackdump).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+The format of the export is rather verbose and contains a lot of JSON files and folders. Those JSON files need to be imported in the viewer application. Since the application is running locally using the `file://` protocol, we are not able to import all of these files at once due to browser security restrictions. This repo comes with a script to merge all of those JSON files into one, allowing the end user to select a single `data.json` file using an `<input type="file">` element.
+
+You can find the merge script and instructions on how to use it in the [`./json-merger`](./json-merger) dir.
+
+### Starting the application
+```bash
+# Install dependencies
+npm i
+# Run the application locally
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+### Building for production
+```bash
+# Install dependencies
+npm i
+# Build the application
+npm run build
 ```
+
+The generated file `dist/index.html` is a bundle of the whole application. Simply open it in the browser to use the app.
+
+> [!IMPORTANT]  
+> Make sure to place any media files in the same folder as the exported `index.html` file to view then.
+
+> [!TIP]
+> Zip the folder and send it to whoever you would like to be able to view the Slack channel.
